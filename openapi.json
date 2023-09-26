@@ -1,0 +1,95 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Number of occurrences calculator",
+    "description" : "Calculate the number of occurrences of characters in a string",
+    "version" : "0.0.1-SNAPSHOT"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:8080",
+    "description" : "Generated server url"
+  } ],
+  "paths" : {
+    "/occurrence/calculate" : {
+      "get" : {
+        "tags" : [ "occurrences-controller" ],
+        "summary" : "Calculate the number of occurrences of characters in a string",
+        "description" : "Returns map with character as key and number of occurrences as value. Entries in map is sorted by value descending. If the entries have the same value, then they are sorted by key alphabetically.",
+        "operationId" : "calculate",
+        "parameters" : [ {
+          "name" : "Input string",
+          "in" : "query",
+          "description" : "The string in which the number of occurrences will be calculated",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "The query argument str is not specified",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "The result is calculated",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Map"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Map" : {
+        "type" : "object",
+        "properties" : {
+          "a" : {
+            "type" : "object",
+            "example" : "5"
+          },
+          "c" : {
+            "type" : "object",
+            "example" : "4"
+          },
+          "b" : {
+            "type" : "object",
+            "example" : "1"
+          }
+        }
+      },
+      "BadRequestResponse" : {
+        "type" : "object",
+        "properties" : {
+          "timestamp" : {
+            "type" : "object",
+            "example" : "2023-09-24T19:56:22.061+00:00"
+          },
+          "status" : {
+            "type" : "object",
+            "example" : "400"
+          },
+          "error" : {
+            "type" : "object",
+            "example" : "Bad Request"
+          },
+          "path" : {
+            "type" : "object",
+            "example" : "/occurrence/calculate"
+          }
+        }
+      }
+    }
+  }
+}
